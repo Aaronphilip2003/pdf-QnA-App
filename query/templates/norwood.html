@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Norwegian Wood</title>
+</head>
+<body>
+    <h1>Norwegian Wood</h1>
+    <form method="GET">
+        <label for="query">Enter your query:</label>
+        <input type="text" name="query" id="query" required>
+        <button type="submit">Search</button>
+    </form>
+
+    {% if result %}
+        <h2>Search Result:</h2>
+        <p>{{ result }}</p>
+    {% else %}
+        <p>No results found.</p>
+    {% endif %}
+</body>
+</html>
+
