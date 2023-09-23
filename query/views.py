@@ -73,25 +73,53 @@ def psych(request):
     query = request.GET.get('query', '')
 
     # Check if the user's query contains the word "summary"
-    generate_summary = "summary" in query.lower()
 
     # Retrieve relevant documents
     ans = vdb_chunks_HF.as_retriever().get_relevant_documents(query)
-
-    # Prepare answers based on whether to generate summary or not
-    if generate_summary:
-        answers = []
-        summary = ""
-
-        if ans:
-            # Generate summaries using the Transformers library
-            summarization_pipeline = pipeline("summarization")
-            answers = [doc.page_content for doc in ans]
-            concatenated_text = " ".join(answers)
-            summary = summarization_pipeline(concatenated_text, max_length=150, min_length=30, do_sample=False)[0]['summary_text']
-    else:
-        answers = [doc.page_content for doc in ans] if ans else []
-        summary = None
+    answers = [doc.page_content for doc in ans] if ans else []
 
     # Return answers and summary as a JSON response
-    return JsonResponse({'answers': answers, 'summary': summary})
+    return JsonResponse({'answers': answers})
+
+
+def eighty(request):
+    embedding2 = GooglePalmEmbeddings(google_api_key="AIzaSyBysL_SjXQkJ8lI1WPTz4VwyH6fxHijGUE")
+    vdb_chunks_HF = FAISS.load_local("query/vdb_chunks_HF", embedding2, index_name="indexEighty")
+    query = request.GET.get('query', '')
+
+    # Check if the user's query contains the word "summary"
+
+    # Retrieve relevant documents
+    ans = vdb_chunks_HF.as_retriever().get_relevant_documents(query)
+    answers = [doc.page_content for doc in ans] if ans else []
+
+    # Return answers and summary as a JSON response
+    return JsonResponse({'answers': answers})
+
+def jh(request):
+    embedding2 = GooglePalmEmbeddings(google_api_key="AIzaSyBysL_SjXQkJ8lI1WPTz4VwyH6fxHijGUE")
+    vdb_chunks_HF = FAISS.load_local("query/vdb_chunks_HF", embedding2, index_name="indexJH")
+    query = request.GET.get('query', '')
+
+    # Check if the user's query contains the word "summary"
+
+    # Retrieve relevant documents
+    ans = vdb_chunks_HF.as_retriever().get_relevant_documents(query)
+    answers = [doc.page_content for doc in ans] if ans else []
+
+    # Return answers and summary as a JSON response
+    return JsonResponse({'answers': answers})
+
+def mov(request):
+    embedding2 = GooglePalmEmbeddings(google_api_key="AIzaSyBysL_SjXQkJ8lI1WPTz4VwyH6fxHijGUE")
+    vdb_chunks_HF = FAISS.load_local("query/vdb_chunks_HF", embedding2, index_name="indexMOV")
+    query = request.GET.get('query', '')
+
+    # Check if the user's query contains the word "summary"
+
+    # Retrieve relevant documents
+    ans = vdb_chunks_HF.as_retriever().get_relevant_documents(query)
+    answers = [doc.page_content for doc in ans] if ans else []
+
+    # Return answers and summary as a JSON response
+    return JsonResponse({'answers': answers})

@@ -1,11 +1,28 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <title>Input Prompt Example</title>
 </head>
 <body>
-    <h1>Home page</h1>
+
+<form id="nameForm">
+  <label for="nameInput">Enter your name:</label>
+  <input type="text" id="nameInput" placeholder="Your name">
+  <button type="submit">Submit</button>
+</form>
+
+<script>
+document.getElementById("nameForm").addEventListener("submit", function(event) {
+  event.preventDefault(); // Prevent the form from submitting normally
+
+  var userName = document.getElementById("nameInput").value;
+  if (userName) {
+    alert("Hello, " + userName + "! Welcome to our website.");
+  } else {
+    alert("Hello, guest! Welcome to our website.");
+  }
+});
+</script>
+
 </body>
 </html>
